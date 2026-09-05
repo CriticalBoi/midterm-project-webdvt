@@ -1,6 +1,10 @@
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { formatCurrency } from '../utils/format.js';
 
+// centerValue is optional: when omitted, the center label shows the sum of
+// all slice values (the natural "total" reading for a category breakdown).
+// Pass an explicit centerValue when the two aren't the same thing — e.g.
+// income minus expense isn't the sum of the two slices.
 export default function DonutChart({ data, colors, centerLabel, centerValue }) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
   if (!total) return null;
@@ -19,12 +23,22 @@ export default function DonutChart({ data, colors, centerLabel, centerValue }) {
             outerRadius={92}
             paddingAngle={data.length > 1 ? 2 : 0}
             stroke="none"
-            isAnimationActive={false}
           >
             {data.map((entry, i) => (
               <Cell key={entry.name} fill={colors[i % colors.length]} />
             ))}
           </Pie>
+          <Tooltip
+            formatter={(value) => formatCurrency(value)}
+            contentStyle={{
+              background: 'var(--bs-tertiary-bg)',
+              border: '1px solid var(--bs-border-color)',
+              borderRadius: 4,
+              fontSize: 13,
+              boxShadow: 'none',
+            }}
+            itemStyle={{ color: 'var(--bs-body-color)' }}
+          />
         </PieChart>
       </ResponsiveContainer>
       <div className="donut-center">
