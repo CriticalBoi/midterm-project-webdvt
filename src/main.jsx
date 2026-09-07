@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       {/* ThemeProvider wraps the whole router so theme is available
-          to every route without prop drilling (Context API requirement). */}
+          to every route without prop drilling. */}
       <ThemeProvider>
         <App />
       </ThemeProvider>

@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export function formatCurrency(value) {
   const n = Number(value) || 0;
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(n);
+  return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(n);
 }
 
 export function formatDate(value) {
